@@ -4,7 +4,7 @@
   "description": "Take a screenshot of any website with a simple GET request!",
   "main": "app.js",
   "scripts": {
-    "start": "npx puppeteer browsers install chrome && nodemon app.js"
+    "start": "nodemon app.js"
   },
   "author": "Charlie Alders",
   "license": "ISC",

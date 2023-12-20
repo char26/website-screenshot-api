@@ -23,9 +23,29 @@ app.get('/screenshot', (req, res) => {
         const uid = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
         const filePath = `/tmp/screenshots/${uid}.jpg`;
 
-        const browser = await puppeteer.launch({
-            headless: "new"
-        });
+        if (process.env.CHROME_BIN) {
+            launchOptions = {
+                executablePath: process.env.CHROME_BIN,
+                headless: "new",
+                args: [
+                    "--no-sandbox",
+                    "--disable-gpu",
+                ]
+            };
+        }
+        else {
+            // if path to chrome is not specified, try to find it.
+            launchOptions = {
+                product: 'chrome',
+                headless: "new",
+                args: [
+                    "--no-sandbox",
+                    "--disable-gpu",
+                ]
+            };
+        }
+
+        const browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
 
         await page.setViewport({ width: width, height: height });
