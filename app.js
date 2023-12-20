@@ -23,9 +23,9 @@ app.get('/screenshot', (req, res) => {
         const uid = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
         const filePath = `/tmp/screenshots/${uid}.jpg`;
 
-        if (process.env.CHROME_BIN) {
+        if (process.env.GOOGLE_CHROME_SHIM) {
             launchOptions = {
-                executablePath: process.env.CHROME_BIN,
+                executablePath: process.env.GOOGLE_CHROME_SHIM,
                 headless: "new",
                 args: [
                     "--no-sandbox",
