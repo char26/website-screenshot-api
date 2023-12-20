@@ -10,6 +10,10 @@ if (!existsSync("/tmp/screenshots")) {
     mkdirSync("/tmp/screenshots");
 }
 
+app.get('/', (req, res) => {
+    res.send('Welcome to Website Screenshot API. To take a screenshot, try the GET /screenshot endpoint.');
+});
+
 app.get('/screenshot', (req, res) => {
     (async () => {
         const url = req.query["url"];
@@ -42,6 +46,10 @@ app.get('/screenshot', (req, res) => {
             });
         }
     })();
+});
+
+app.get('/ping', (req, res) => {
+    res.send('pong');
 });
 
 app.listen(PORT, () => {
