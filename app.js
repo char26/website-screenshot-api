@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
 app.get('/screenshot', (req, res) => {
     (async () => {
         const url = req.query["url"];
-        const width = req.query["width"] || 1920;
-        const height = req.query["height"] || 1080;
+        const width = Number(req.query["width"]) || 1920;
+        const height = Number(req.query["height"]) || 1080;
 
         const uid = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
         const filePath = `/tmp/screenshots/${uid}.jpg`;
